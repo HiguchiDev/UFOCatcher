@@ -1,0 +1,5 @@
+*.meta
+Assets/AssetStoreOriginals/*
+Library/metadata/*
+*.log
+Library/*Cache/*
