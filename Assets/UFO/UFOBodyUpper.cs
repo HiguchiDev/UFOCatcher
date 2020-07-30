@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UFOBodyUpper : UFOAction
 {
-    private const float Y_SPPED = 0.025f;
-    //private const float STOP_ANGLE = 300.0f - 1.0f;
+    private const float Y_SPPED = 0.04f;
+    private const float STOP_Y = 1.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class UFOBodyUpper : UFOAction
     }
 
     public override bool isActionEnd() {
-        return false;
+        return this.transform.position.y >= STOP_Y;
     }
 
     public override UFOAction exchangeNextScript(GameObject obj){
@@ -29,6 +29,4 @@ public class UFOBodyUpper : UFOAction
         obj.AddComponent<UFOWait>();
         return obj.GetComponent<UFOWait>();
     }
-
-    
 }

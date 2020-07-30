@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UFOBodyFaller : UFOAction
 {
-    private const float Y_SPPED = 0.025f;
+    private const float Y_SPPED = 0.04f;
     private const float STOP_ANGLE = 300.0f - 1.0f;
 
     // Start is called before the first frame update
@@ -21,6 +21,11 @@ public class UFOBodyFaller : UFOAction
     }
 
     public override bool isActionEnd() {
+        /*if( rightArm.transform.localEulerAngles.z <= STOP_ANGLE || leftArm.transform.localEulerAngles.z <= STOP_ANGLE || ufoBody.GetComponent<UFOBody>().isCollision ){
+            Debug.Log("right : " + rightArm.transform.localEulerAngles.z);
+            Debug.Log("left : " + leftArm.transform.localEulerAngles.z);
+            Debug.Log("isCollision : " + ufoBody.GetComponent<UFOBody>().isCollision);
+        }*/
         return rightArm.transform.localEulerAngles.z <= STOP_ANGLE || leftArm.transform.localEulerAngles.z <= STOP_ANGLE || ufoBody.GetComponent<UFOBody>().isCollision;
     }
 

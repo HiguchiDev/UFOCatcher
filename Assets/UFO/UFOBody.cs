@@ -24,4 +24,10 @@ public class UFOBody : MonoBehaviour
         }
         //Debug.Log("OtherName : " + other.gameObject.name);
     }
+
+    void OnTriggerExit(Collider other){
+        if(other.gameObject.name != "Prim.00000000"){
+            isCollision = false;
+        }
+    }
 }

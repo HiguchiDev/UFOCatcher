@@ -36,8 +36,8 @@ public class ArmCloser : UFOAction
         
         
         if(waitCount >= WAIT_MAX) {
-            rightArmCloser.exchangeNextScript(obj);
-            leftArmCloser.exchangeNextScript(obj);
+            //rightArmCloser.exchangeNextScript(obj);
+            //leftArmCloser.exchangeNextScript(obj);
         }
         obj.AddComponent<UFOBodyUpper>();
         
@@ -46,8 +46,8 @@ public class ArmCloser : UFOAction
 
     public override void after() {
         if(waitCount >= WAIT_MAX) {
-            rightArmCloser.after();
-            leftArmCloser.after();
+            //rightArmCloser.after();
+            //leftArmCloser.after();
         }
     }
 

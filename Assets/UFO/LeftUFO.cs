@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RightUFO : MonoBehaviour
+public class LeftUFO : MonoBehaviour
 {
     private float initialX;
     private float initialZ;
@@ -19,14 +19,14 @@ public class RightUFO : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(this.initialX, this.ufoBody.transform.position.y + 0.25f, this.initialZ);
+        transform.position = new Vector3(this.ufoBody.transform.position.x, this.ufoBody.transform.position.y + 0.25f, this.ufoBody.transform.position.z);
         fixedAngleXY();
     }
 
     private void fixedAngleXY() {
         Vector3 worldAngle = transform.localEulerAngles;
         worldAngle.x = 0.0f; // ワールド座標を基準に、x軸を軸にした回転を10度に変更
-        worldAngle.y = 0.0f; // ワールド座標を基準に、y軸を軸にした回転を10度に変更
+        worldAngle.y = 180.0f; // ワールド座標を基準に、y軸を軸にした回転を10度に変更
         //worldAngle.z = 50.0f; // ワールド座標を基準に、z軸を軸にした回転を10度に変更
         transform.eulerAngles = worldAngle; // 回転角度を設定
     }

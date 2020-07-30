@@ -5,9 +5,9 @@ using UnityEngine;
 public class LeftArmCloser : UFOAction
 {
     private Rigidbody rb;
-    private const float CLOSE_SPEED = 20.0f;
+    private const float CLOSE_SPEED = 1000.0f;
     private const float CLOSE_ANGLE = 358.0f;
-    private bool isEnd = false;
+    public bool isEnd = false;
     private int waitCount = 0;
     private const int WAIT_MAX = 300;
 
@@ -21,35 +21,57 @@ public class LeftArmCloser : UFOAction
     void Update()
     {
         if(isEnd == false) {
+            //アームクローズ
             rb.AddTorque(0, 0, -CLOSE_SPEED, ForceMode.Force);
-           // Debug.Log("[" + nameof(LeftArmCloser) + "] close now");
+            notFreezeRotation();
         }
         else {
+            //加速オフ
             rb.angularVelocity = Vector3.zero;
-            //Debug.Log("[" + nameof(LeftArmCloser) + "] close end");
-        }
 
+            //待機時間まではアーム固定
+            if(waitCount <= WAIT_MAX){
+                waitCount++;
+                freezeRotation();
+            }
+            //アーム開放
+            else{
+                notFreezeRotation();
+            }
+
+        }
+     
+        //クローズ角度を超えたら or 速度が速くて一周したら（z <= 100.0f）
         if(isEnd == false &&
             (transform.localEulerAngles.z >= CLOSE_ANGLE || transform.localEulerAngles.z <= 100.0f)) {
             isEnd = true;
             rb.angularVelocity = Vector3.zero;
         }
-
-        //Debug.Log("[" + nameof(LeftArmCloser) + "] z angle : " + transform.localEulerAngles.z + ", open z angle : " + CLOSE_ANGLE);
-        
-
     }
 
-/*  当たったら止める
+    //  当たったら止める
     void OnCollisionStay(Collision collision)
     {
-        
         isEnd = true;
         rb.angularVelocity = Vector3.zero;
-        fixedPosition();
-        Debug.Log("collision object name  : " + collision.gameObject.name);
+        //Debug.Log("collision object name  : " + collision.gameObject.name);
     }
-*/
+
+    void OnCollisionExit(Collision collision)
+    {
+        isEnd = false;
+        //Debug.Log("collision exit");
+
+    }
+
+    private void notFreezeRotation() {
+        this.rb.constraints = RigidbodyConstraints.None;
+    }
+
+    private void freezeRotation() {
+        this.rb.constraints = RigidbodyConstraints.FreezeRotation;
+        this.transform.localEulerAngles = new Vector3(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y, this.transform.localEulerAngles.z);
+    }
 
     private void fixedPosition() {
         this.rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -58,10 +80,10 @@ public class LeftArmCloser : UFOAction
     }
 
     public override bool isActionEnd() {
-        if(++waitCount <= WAIT_MAX){
+        if(waitCount <= WAIT_MAX){
             return false;
         }
-
+        
         return isEnd;
     }
 

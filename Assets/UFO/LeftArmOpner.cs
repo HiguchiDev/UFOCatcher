@@ -5,7 +5,7 @@ using UnityEngine;
 public class LeftArmOpener : UFOAction
 {
     private Rigidbody rb;
-    private const float OPEN_SPEED = 50.0f;
+    private const float OPEN_SPEED = 1000.0f;
     private const float OPEN_ANGLE = 300.0f;
 
     // Start is called before the first frame update

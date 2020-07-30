@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TempWait : MonoBehaviour
+public class TempWait : UFOAction
 {
     private Rigidbody rb;
     // Start is called before the first frame update
@@ -24,5 +24,13 @@ public class TempWait : MonoBehaviour
         worldAngle.y = 0.0f; // ワールド座標を基準に、y軸を軸にした回転を10度に変更
         //worldAngle.z = 50.0f; // ワールド座標を基準に、z軸を軸にした回転を10度に変更
         transform.eulerAngles = worldAngle; // 回転角度を設定
+    }
+
+    public override bool isActionEnd() {
+        return false;
+    }
+
+    public override UFOAction exchangeNextScript(GameObject obj) {
+        return null;
     }
 }
