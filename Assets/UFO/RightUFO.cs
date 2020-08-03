@@ -19,7 +19,7 @@ public class RightUFO : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(this.ufoBody.transform.position.x - 1.5f, this.ufoBody.transform.position.y + 0.25f, this.ufoBody.transform.position.z);
+        transform.position = new Vector3(this.ufoBody.transform.position.x - 2.0f, this.ufoBody.transform.position.y + 0.25f, this.ufoBody.transform.position.z);
         fixedAngleXY();
     }
 

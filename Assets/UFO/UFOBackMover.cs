@@ -7,7 +7,8 @@ public class UFOBackMover : UFOMover
     // Start is called before the first frame update
     void Start()
     {
-        speedZ = 0.025f;
+        speedZ = GameParameters.UFO_BODY_MOVE_SPEED;
+        base.Start();
     }
 
     // Update is called once per frame
@@ -18,7 +19,19 @@ public class UFOBackMover : UFOMover
 
     public override UFOAction exchangeNextScript(GameObject obj){
         Destroy(this);
-        obj.AddComponent<UFOWait>();
-        return obj.GetComponent<UFOWait>();
+
+        destroyUFOActions(rightArm);
+        destroyUFOActions(leftArm);
+
+        obj.AddComponent<ArmOpener>();
+        return obj.GetComponent<ArmOpener>();
+    }
+
+    private void destroyUFOActions(GameObject obj){
+        UFOAction[] ufoActions = obj.GetComponents<UFOAction> ();
+
+        foreach (UFOAction action in ufoActions) {
+            Destroy(action);
+        }
     }
 }

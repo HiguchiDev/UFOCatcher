@@ -26,15 +26,13 @@ public class UFOAnimationSwitcher : MonoBehaviour
     }
 
     public void catchItem(){
-        if(isWait()){
+        if(ufoAction is UFOCatchWait){
             destroyUFOActions(ufo);
             destroyUFOActions(GameObject.Find("RightArm"));
             destroyUFOActions(GameObject.Find("LeftArm"));
 
-            ufo.AddComponent<ArmOpener>();
-            ufoAction = ufo.GetComponent<ArmOpener>();
-
-
+            UFOCatchWait wait = (UFOCatchWait)ufoAction;
+            wait.catchItem();
         }
     }
 
@@ -64,12 +62,11 @@ public class UFOAnimationSwitcher : MonoBehaviour
     public void stopMove(){
         if(ufoAction is UFOMover){
             UFOMover mover = (UFOMover)ufoAction;
-
             mover.stop();
         }
     }
 
-    private bool isWait(){
+    public bool isWait(){
         return ufo.GetComponent<UFOWait>() != null;
     }
 

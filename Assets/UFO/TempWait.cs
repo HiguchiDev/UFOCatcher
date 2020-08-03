@@ -16,6 +16,8 @@ public class TempWait : UFOAction
         this.rb.constraints = RigidbodyConstraints.FreezeRotation;
         this.rb.constraints = RigidbodyConstraints.FreezePosition;
         //fixedAngleXY();
+
+        this.rb.mass = GameParameters.INIT_MASS;
     }
 
     private void fixedAngleXY() {

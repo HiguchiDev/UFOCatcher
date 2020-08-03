@@ -5,11 +5,9 @@ using UnityEngine;
 public class LeftArmCloser : UFOAction
 {
     private Rigidbody rb;
-    private const float CLOSE_SPEED = 1000.0f;
     private const float CLOSE_ANGLE = 358.0f;
     public bool isEnd = false;
     private int waitCount = 0;
-    private const int WAIT_MAX = 300;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +20,7 @@ public class LeftArmCloser : UFOAction
     {
         if(isEnd == false) {
             //アームクローズ
-            rb.AddTorque(0, 0, -CLOSE_SPEED, ForceMode.Force);
+            rb.AddTorque(0, 0, -GameParameters.ARM_CLOSE_SPPED, ForceMode.Force);
             notFreezeRotation();
         }
         else {
@@ -30,7 +28,7 @@ public class LeftArmCloser : UFOAction
             rb.angularVelocity = Vector3.zero;
 
             //待機時間まではアーム固定
-            if(waitCount <= WAIT_MAX){
+            if(waitCount <= GameParameters.CLOSE_WAIT_MAX){
                 waitCount++;
                 freezeRotation();
             }
@@ -80,7 +78,7 @@ public class LeftArmCloser : UFOAction
     }
 
     public override bool isActionEnd() {
-        if(waitCount <= WAIT_MAX){
+        if(waitCount <= GameParameters.CLOSE_WAIT_MAX){
             return false;
         }
         

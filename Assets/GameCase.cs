@@ -20,7 +20,12 @@ public class GameCase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(ufoAnimationSwitcher.isWait()){
+            sideMoved = false;
+            backMoved = false;
+            sideMoving = false;
+            backMoving = false;
+        }
     }
 
     public void catchItem(){

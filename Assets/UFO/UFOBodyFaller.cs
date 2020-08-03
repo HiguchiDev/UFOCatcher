@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UFOBodyFaller : UFOAction
 {
-    private const float Y_SPPED = 0.04f;
     private const float STOP_ANGLE = 300.0f - 1.0f;
 
     // Start is called before the first frame update
@@ -16,7 +15,7 @@ public class UFOBodyFaller : UFOAction
     // Update is called once per frame
     void Update()
     {
-        this.transform.position += new Vector3(0, -Y_SPPED, 0);
+        this.transform.position += new Vector3(0, -GameParameters.UFO_BODY_FALL_SPEED, 0);
         //Debug.Log("[" + nameof(UFOBodyFaller) + "] y position : " + this.transform.position);
     }
 

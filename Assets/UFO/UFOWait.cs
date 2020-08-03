@@ -11,6 +11,7 @@ public class UFOWait : UFOAction
         base.Start();
         leftArm.AddComponent<TempWait>();
         rightArm.AddComponent<TempWait>();
+
     }
 
     // Update is called once per frame

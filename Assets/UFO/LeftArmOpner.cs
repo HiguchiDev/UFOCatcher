@@ -5,7 +5,6 @@ using UnityEngine;
 public class LeftArmOpener : UFOAction
 {
     private Rigidbody rb;
-    private const float OPEN_SPEED = 1000.0f;
     private const float OPEN_ANGLE = 300.0f;
 
     // Start is called before the first frame update
@@ -19,7 +18,7 @@ public class LeftArmOpener : UFOAction
     // Update is called once per frame
     void Update()
     {
-        rb.AddTorque(0, 0, OPEN_SPEED, ForceMode.Force);
+        rb.AddTorque(0, 0, GameParameters.ARM_OPEN_SPPED, ForceMode.Force);
         //Debug.Log("[" + nameof(LeftArmOpener) + "] z angle : " + transform.localEulerAngles.z + ", open z angle : " + OPEN_ANGLE);
     }
 

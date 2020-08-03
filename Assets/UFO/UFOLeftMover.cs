@@ -7,7 +7,8 @@ public class UFOLeftMover : UFOMover
     // Start is called before the first frame update
     void Start()
     {
-        speedX = -0.025f;
+        speedX = -GameParameters.UFO_BODY_MOVE_SPEED;
+        GameParameters.score += 100;
     }
 
     // Update is called once per frame
