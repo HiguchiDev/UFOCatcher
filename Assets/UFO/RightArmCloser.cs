@@ -16,7 +16,7 @@ public class RightArmCloser : UFOAction
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(isEnd == false) {
             //アームクローズ
@@ -36,7 +36,6 @@ public class RightArmCloser : UFOAction
             else{
                 notFreezeRotation();
             }
-
         }
      
         //クローズ角度を超えたら or 速度が速くて一周したら（z <= 100.0f）

@@ -13,7 +13,7 @@ public class UFOBodyFaller : UFOAction
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         this.transform.position += new Vector3(0, -GameParameters.UFO_BODY_FALL_SPEED, 0);
         //Debug.Log("[" + nameof(UFOBodyFaller) + "] y position : " + this.transform.position);

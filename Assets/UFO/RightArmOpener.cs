@@ -16,7 +16,7 @@ public class RightArmOpener : UFOAction
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         rb.AddTorque(0, 0, -GameParameters.ARM_OPEN_SPPED, ForceMode.Force);
         //Debug.Log("[" + nameof(RightArmOpener) + "] z angle : " + transform.localEulerAngles.z + ", open z angle : " + OPEN_ANGLE);

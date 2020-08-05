@@ -6,7 +6,7 @@ public class ArmCloser : UFOAction
 {
    RightArmCloser rightArmCloser;
    LeftArmCloser leftArmCloser;
-   private int waitCount = 0;
+   public int waitCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -21,13 +21,15 @@ public class ArmCloser : UFOAction
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(waitCount < GameParameters.CLOSE_WAIT_MAX){
+            waitCount++;
+        }
     }
 
     public override bool isActionEnd() {
-        return rightArmCloser.isActionEnd() || leftArmCloser.isActionEnd() || ++waitCount >= GameParameters.CLOSE_WAIT_MAX;
+        return rightArmCloser.isActionEnd() || leftArmCloser.isActionEnd() || waitCount >= GameParameters.CLOSE_WAIT_MAX;
     }
 
     public override UFOAction exchangeNextScript(GameObject obj) {

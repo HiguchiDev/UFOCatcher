@@ -16,7 +16,7 @@ public class LeftArmCloser : UFOAction
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(isEnd == false) {
             //アームクローズ

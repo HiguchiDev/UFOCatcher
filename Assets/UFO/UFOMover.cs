@@ -15,7 +15,7 @@ public abstract class UFOMover : UFOAction
     }
 
     // Update is called once per frame
-    public virtual void  Update()
+    public virtual void FixedUpdate()
     {
         this.transform.position = new Vector3(this.transform.position.x + speedX, this.transform.position.y, this.transform.position.z + speedZ);
     }

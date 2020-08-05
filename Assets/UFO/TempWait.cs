@@ -11,7 +11,7 @@ public class TempWait : UFOAction
         this.rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         this.rb.constraints = RigidbodyConstraints.FreezeRotation;
         this.rb.constraints = RigidbodyConstraints.FreezePosition;

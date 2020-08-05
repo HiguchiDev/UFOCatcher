@@ -32,7 +32,7 @@ public class LeftArm : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(this.isOpenComp == false) {
             rb.AddTorque(0, 0, ROTATE_SPEED, ForceMode.Force);
