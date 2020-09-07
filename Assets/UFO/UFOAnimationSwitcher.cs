@@ -21,18 +21,6 @@ public class UFOAnimationSwitcher : MonoBehaviour
         if(ufoAction != null && ufoAction.isActionEnd()){
             ufoAction.after();
             ufoAction = ufoAction.exchangeNextScript(ufo);
-            Debug.Log("next action");
-        }
-    }
-
-    public void catchItem(){
-        if(ufoAction is UFOCatchWait){
-            destroyUFOActions(ufo);
-            destroyUFOActions(GameObject.Find("RightArm"));
-            destroyUFOActions(GameObject.Find("LeftArm"));
-
-            UFOCatchWait wait = (UFOCatchWait)ufoAction;
-            wait.catchItem();
         }
     }
 

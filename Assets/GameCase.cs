@@ -10,6 +10,7 @@ public class GameCase : MonoBehaviour
     public bool backMoved = false;
     public bool sideMoving = false;
     public bool backMoving = false;
+    public bool playing = false;
     
     // Start is called before the first frame update
     void Start()
@@ -20,43 +21,47 @@ public class GameCase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ufoAnimationSwitcher.isWait()){
+        if(ufoAnimationSwitcher.isWait() &&
+            sideMoved && backMoved && sideMoving && backMoving && playing){
             sideMoved = false;
             backMoved = false;
             sideMoving = false;
             backMoving = false;
+            this.playing = false;
         }
     }
 
-    public void catchItem(){
-        if(sideMoved && backMoved){
-            ufoAnimationSwitcher.catchItem();
-        }
+    public void insertCoin(){
+        this.playing = true;
+    }
+
+    public bool canPlay(){
+        return this.playing == false;
     }
 
     public void pushSideMoveButton(){
-        if(sideMoved == false){
+        if(sideMoved == false && this.playing){
             sideMoving = true;
             ufoAnimationSwitcher.moveLeft();
         }
     }
 
     public void releaseSideMoveButton(){
-        if(sideMoving){
+        if(sideMoving && this.playing){
             sideMoved = true;
             ufoAnimationSwitcher.stopMove();
         }
     }
 
     public void pushBackMoveButton(){
-        if(!backMoved && sideMoved){
+        if(!backMoved && sideMoved && this.playing){
             backMoving = true;
             ufoAnimationSwitcher.moveBack();
         }
     }
 
     public void releaseBackMoveButton(){
-        if(backMoving){
+        if(backMoving && this.playing){
             backMoved = true;
             ufoAnimationSwitcher.stopMove();
         }

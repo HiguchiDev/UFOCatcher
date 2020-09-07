@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class UFOMover : UFOAction
 {
-    private bool isEnd = false;
+    protected bool isEnd = false;
     protected float speedX = 0.0f;
     protected float speedZ = 0.0f;
 

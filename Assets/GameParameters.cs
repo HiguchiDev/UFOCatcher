@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public static class GameParameters {
-    public static float ARM_CLOSE_SPPED = 8000.0f;
+    public static float ARM_CLOSE_SPPED = 9500.0f;
     public static float ARM_OPEN_SPPED = 8000.0f;
     public static float UFO_BODY_MOVE_SPEED = 0.04f;
     public static float UFO_BODY_FALL_SPEED = 0.0375f;

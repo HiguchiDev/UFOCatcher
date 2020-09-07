@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class UFOBackMover : UFOMover
 {
+    private UFOStopper stopper;
+
     // Start is called before the first frame update
     void Start()
     {
+        stopper = GameObject.Find("BackStopper").GetComponent<UFOStopper>();
         speedZ = GameParameters.UFO_BODY_MOVE_SPEED;
         base.Start();
     }
@@ -15,6 +18,10 @@ public class UFOBackMover : UFOMover
     public override void FixedUpdate()
     {
         base.FixedUpdate();
+
+        if(stopper.isWallCollision == true){
+            this.isEnd = true;
+        }
     }
 
     public override UFOAction exchangeNextScript(GameObject obj){

@@ -7,6 +7,13 @@ public class Player : MonoBehaviour
 
     protected GameObject ufo;
     private GameCase gameCase;
+    private Wallet wallet;
+
+    void Awake()
+    {
+        wallet = GameObject.Find("Wallet").GetComponent<Wallet>();
+        wallet.setCoin(10);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +25,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Space) && gameCase.canPlay()){
+            bool coin = wallet.takeoutOneCoin();
+
+            if(coin){
+                gameCase.insertCoin();
+            }
+            
+        }
         if(Input.GetKeyDown(KeyCode.A)){
             gameCase.pushSideMoveButton();
         }
