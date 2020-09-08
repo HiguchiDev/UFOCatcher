@@ -7,13 +7,19 @@ using System;
 public class Coin : MonoBehaviour
 {
     public bool actionEnd = false;
-    GameObject moneySlot;
+    public GameObject moneySlot;
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        Debug.Log("init");
         moneySlot = GameObject.Find("MoneySlotHole");
-        this.action();
+
+        if(moneySlot != null){
+            this.action();
+        }
+
+        this.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 90.0f);
     }
 
     // Update is called once per frame
@@ -48,14 +54,22 @@ public class Coin : MonoBehaviour
                             ),
                 //new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y + Math.Abs(moneySlot.transform.position.y) / 2, moneySlot.transform.position.z),
                 new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y, moneySlot.transform.position.z),
-                new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y * 2, moneySlot.transform.position.z)
+                new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y + (moneySlot.transform.position.y * 0.1f), moneySlot.transform.position.z)
             };
 
+            Debug.Log("point1: " + new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
+            Debug.Log("point2: " + new Vector3(
+                                moneySlot.transform.position.x ,
+                                Math.Abs(this.transform.position.y) * 12,
+                                this.transform.position.z + Math.Abs(Math.Abs(this.transform.position.z) - Math.Abs(moneySlot.transform.position.z)) / 2
+                            ));
+            Debug.Log("point3: " + new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y, moneySlot.transform.position.z));
+            //Debug.Log("point4: " + new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y + 10.0f, moneySlot.transform.position.z));
             
 
             this.transform.DOPath(
                 path,
-                2.5f,
+                1.5f,
                 PathType.CatmullRom
             ).OnComplete(() =>
                 {

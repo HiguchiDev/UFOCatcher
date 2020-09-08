@@ -11,11 +11,19 @@ public class GameCase : MonoBehaviour
     public bool sideMoving = false;
     public bool backMoving = false;
     public bool playing = false;
+
+    private Coin coin;
+    private GameObject sideMoveButton;
+    private GameObject backMoveButton;
     
     // Start is called before the first frame update
     void Start()
     {
+        this.sideMoveButton = GameObject.Find("SideMoveButton");
+        this.backMoveButton = GameObject.Find("BackMoveButton");
         ufoAnimationSwitcher = GameObject.Find("UFOAnimationSwitcher").GetComponent<UFOAnimationSwitcher>();
+        this.sideMoveButton.GetComponent<Renderer>().material.color = Color.gray;
+        this.backMoveButton.GetComponent<Renderer>().material.color = Color.gray;
     }
 
     // Update is called once per frame
@@ -28,11 +36,20 @@ public class GameCase : MonoBehaviour
             sideMoving = false;
             backMoving = false;
             this.playing = false;
+            this.sideMoveButton.GetComponent<Renderer>().material.color = Color.gray;
+            this.backMoveButton.GetComponent<Renderer>().material.color = Color.gray;
+        }
+
+        if(this.coin != null && this.coin.actionEnd){
+            this.playing = true;
+            this.coin = null;
+            this.sideMoveButton.GetComponent<Renderer>().material.color = Color.yellow;
+            this.backMoveButton.GetComponent<Renderer>().material.color = Color.yellow;
         }
     }
 
-    public void insertCoin(){
-        this.playing = true;
+    public void insertCoin(Coin coin){
+        this.coin = coin;
     }
 
     public bool canPlay(){

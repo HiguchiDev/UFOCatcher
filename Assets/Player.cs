@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     protected GameObject ufo;
     private GameCase gameCase;
     private Wallet wallet;
+    private GameObject coinPrefab;
+    private GameObject coinInstance;
 
     void Awake()
     {
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        coinPrefab = (GameObject)Resources.Load("Coin");
+ 
         ufo = GameObject.Find("UFO");
         gameCase = GameObject.Find("Case").GetComponent<GameCase>();
     }
@@ -29,7 +33,8 @@ public class Player : MonoBehaviour
             bool coin = wallet.takeoutOneCoin();
 
             if(coin){
-                gameCase.insertCoin();
+                GameObject coinInstance = (GameObject)Instantiate(coinPrefab, coinPrefab.transform.position, Quaternion.identity);
+                gameCase.insertCoin(coinInstance.GetComponent<Coin>());
             }
             
         }
