@@ -12,7 +12,7 @@ public class GameCase : MonoBehaviour
     public bool backMoving = false;
     public bool playing = false;
 
-    private Coin coin;
+    private GameObject coin;
     private GameObject sideMoveButton;
     private GameObject backMoveButton;
     
@@ -22,8 +22,7 @@ public class GameCase : MonoBehaviour
         this.sideMoveButton = GameObject.Find("SideMoveButton");
         this.backMoveButton = GameObject.Find("BackMoveButton");
         ufoAnimationSwitcher = GameObject.Find("UFOAnimationSwitcher").GetComponent<UFOAnimationSwitcher>();
-        this.sideMoveButton.GetComponent<Renderer>().material.color = Color.gray;
-        this.backMoveButton.GetComponent<Renderer>().material.color = Color.gray;
+
     }
 
     // Update is called once per frame
@@ -36,24 +35,22 @@ public class GameCase : MonoBehaviour
             sideMoving = false;
             backMoving = false;
             this.playing = false;
-            this.sideMoveButton.GetComponent<Renderer>().material.color = Color.gray;
-            this.backMoveButton.GetComponent<Renderer>().material.color = Color.gray;
         }
 
-        if(this.coin != null && this.coin.actionEnd){
+        if(this.coin != null && this.coin.GetComponent<Coin>().actionEnd){
             this.playing = true;
+            Destroy(this.coin);
             this.coin = null;
-            this.sideMoveButton.GetComponent<Renderer>().material.color = Color.yellow;
-            this.backMoveButton.GetComponent<Renderer>().material.color = Color.yellow;
+            sideMoveButton.GetComponent<MoveButton>().active();
         }
     }
 
-    public void insertCoin(Coin coin){
+    public void insertCoin(GameObject coin){
         this.coin = coin;
     }
 
     public bool canPlay(){
-        return this.playing == false;
+        return this.playing == false && this.coin == null;
     }
 
     public void pushSideMoveButton(){
@@ -64,9 +61,11 @@ public class GameCase : MonoBehaviour
     }
 
     public void releaseSideMoveButton(){
-        if(sideMoving && this.playing){
+        if(!backMoved && sideMoving && this.playing){
             sideMoved = true;
             ufoAnimationSwitcher.stopMove();
+            sideMoveButton.GetComponent<MoveButton>().inactive();
+            backMoveButton.GetComponent<MoveButton>().active();
         }
     }
 
@@ -81,6 +80,7 @@ public class GameCase : MonoBehaviour
         if(backMoving && this.playing){
             backMoved = true;
             ufoAnimationSwitcher.stopMove();
+            backMoveButton.GetComponent<MoveButton>().inactive();
         }
     }
 }

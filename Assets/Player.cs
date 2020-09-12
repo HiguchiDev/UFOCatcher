@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
         coinPrefab = (GameObject)Resources.Load("Coin");
  
         ufo = GameObject.Find("UFO");
-        gameCase = GameObject.Find("Case").GetComponent<GameCase>();
+        gameCase = GameObject.Find("GameCase").GetComponent<GameCase>();
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 
             if(coin){
                 GameObject coinInstance = (GameObject)Instantiate(coinPrefab, coinPrefab.transform.position, Quaternion.identity);
-                gameCase.insertCoin(coinInstance.GetComponent<Coin>());
+                gameCase.insertCoin(coinInstance);
             }
             
         }
