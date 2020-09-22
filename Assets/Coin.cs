@@ -62,7 +62,7 @@ public class Coin : MonoBehaviour
                 new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y, moneySlot.transform.position.z),
                 new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y + (moneySlot.transform.position.y * 0.15f), moneySlot.transform.position.z)
             };
-
+/*
             Debug.Log("point1: " + new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
             Debug.Log("point2: " + new Vector3(
                                 moneySlot.transform.position.x ,
@@ -72,7 +72,7 @@ public class Coin : MonoBehaviour
             Debug.Log("point3: " + new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y, moneySlot.transform.position.z));
             Debug.Log("point4: " + new Vector3(moneySlot.transform.position.x, moneySlot.transform.position.y + (moneySlot.transform.position.y * 0.1f), moneySlot.transform.position.z));
             
-
+*/
             this.transform.DOPath(
                 path,
                 1.25f,

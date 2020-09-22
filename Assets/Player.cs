@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -49,6 +50,10 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.S)){
             gameCase.releaseBackMoveButton();
+        }
+
+        if(Input.GetKeyDown(KeyCode.L)){
+            SceneManager.LoadScene("Title");
         }
     }   
 }

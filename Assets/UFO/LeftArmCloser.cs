@@ -7,25 +7,45 @@ public class LeftArmCloser : UFOAction
     private Rigidbody rb;
     private const float CLOSE_ANGLE = 358.0f;
     public bool isEnd = false;
-    private int waitCount = 0;
+    public int waitCount = 0;
+    private GameObject obj_debug;
+    private Vector3 beforeRotate;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody>();
+        this.obj_debug = GameObject.Find("LeftArmObj");
+
+        //beforeRotate = transform.localEulerAngles;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(isEnd == false) {
+
+        //Vector3 after = transform.localEulerAngles;
+
+        if (isEnd == false) {
             //アームクローズ
             rb.AddTorque(0, 0, -GameParameters.ARM_CLOSE_SPPED, ForceMode.Force);
             notFreezeRotation();
+            //obj_debug.GetComponent<Renderer>().material.color = Color.yellow;
         }
         else {
-            //加速オフ
-            rb.angularVelocity = Vector3.zero;
+
+            /*
+            if (beforeRotate.z > after.z) {
+                rb.AddTorque(0, 0, -GameParameters.ARM_CLOSE_SPPED * 2, ForceMode.Force);
+                obj_debug.GetComponent<Renderer>().material.color = Color.yellow;
+            }
+            else
+            {
+                //加速オフ
+                rb.angularVelocity = Vector3.zero;
+                obj_debug.GetComponent<Renderer>().material.color = Color.gray;
+            }
+            */
 
             //待機時間まではアーム固定
             if(waitCount <= GameParameters.CLOSE_WAIT_MAX){
@@ -38,6 +58,7 @@ public class LeftArmCloser : UFOAction
             }
 
         }
+
      
         //クローズ角度を超えたら or 速度が速くて一周したら（z <= 100.0f）
         if(isEnd == false &&
@@ -45,20 +66,24 @@ public class LeftArmCloser : UFOAction
             isEnd = true;
             rb.angularVelocity = Vector3.zero;
         }
+        
+
+        //beforeRotate = transform.localEulerAngles;
+
     }
 
     //  当たったら止める
     void OnCollisionStay(Collision collision)
     {
         isEnd = true;
-        rb.angularVelocity = Vector3.zero;
+        //rb.angularVelocity = Vector3.zero;
         //Debug.Log("collision object name  : " + collision.gameObject.name);
     }
 
     void OnCollisionExit(Collision collision)
     {
         isEnd = false;
-        //Debug.Log("collision exit");
+        Debug.Log("collision exit");
 
     }
 
@@ -90,7 +115,4 @@ public class LeftArmCloser : UFOAction
         return null;
     }
 
-    public override void after() {
-        rb.angularVelocity = Vector3.zero;
-    }
 }

@@ -27,12 +27,12 @@ public class Camera : MonoBehaviour {
                 //サブカメラをアクティブに設定
                 frontCamera.SetActive(false);
                 sideCamera.SetActive(true);
-                Debug.Log("main camera active");
+                //Debug.Log("main camera active");
             }else{
                 //メインカメラをアクティブに設定
                 frontCamera.SetActive(true);
                 sideCamera.SetActive(false);
-                Debug.Log("side camera active");
+                //Debug.Log("side camera active");
             }
         }
 

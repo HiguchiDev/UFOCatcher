@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class UFOBodyUpper : UFOAction
 {
+
+    RightArmCloserUpper rightArmCloser;
+    LeftArmCloserUpper leftArmCloser;
+
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
+
+
+        rightArm.AddComponent<RightArmCloserUpper>();
+        rightArmCloser = rightArm.GetComponent<RightArmCloserUpper>();
+
+        leftArm.AddComponent<LeftArmCloserUpper>();
+        leftArmCloser = leftArm.GetComponent<LeftArmCloserUpper>();
     }
 
     // Update is called once per frame
@@ -26,6 +37,8 @@ public class UFOBodyUpper : UFOAction
     }
 
     public override UFOAction exchangeNextScript(GameObject obj){
+        rightArmCloser.exchangeNextScript(obj);
+        leftArmCloser.exchangeNextScript(obj);
         Destroy(this);
         obj.AddComponent<UFOReturnMover>();
         return obj.GetComponent<UFOReturnMover>();

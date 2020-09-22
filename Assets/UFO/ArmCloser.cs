@@ -36,10 +36,10 @@ public class ArmCloser : UFOAction
         Destroy(this);
         
         
-        if(waitCount >= GameParameters.CLOSE_WAIT_MAX) {
-            //rightArmCloser.exchangeNextScript(obj);
-            //leftArmCloser.exchangeNextScript(obj);
-        }
+        //if(waitCount >= GameParameters.CLOSE_WAIT_MAX) {
+            rightArmCloser.exchangeNextScript(obj);
+            leftArmCloser.exchangeNextScript(obj);
+        //}
         obj.AddComponent<UFOBodyUpper>();
         
         return obj.GetComponent<UFOBodyUpper>();
